@@ -1,14 +1,15 @@
 
-import React, { Component } from 'react';
-import axios from 'axios';
+// import React, { Component } from 'react';
+import React from 'react';
+import Api from '../api';
 
 // Local component
 import TextField from './TextField';
 
 class CurrencyCalculator extends React.Component {
     state = {
-        fromCurrency : '',
-        toCurrency : '',
+        fromCurrency : 'USD',
+        toCurrency : 'EUR',
     }
 
     render() {
@@ -18,34 +19,37 @@ class CurrencyCalculator extends React.Component {
             CurrencyCalculator
             <TextField
                 onCurrencyChange={this.handleFromCurrencyChange}
+                inputField={this.state.fromCurrency}
             />
             <TextField
                 onCurrencyChange={this.handleToCurrencyChange}
+                inputField={this.state.toCurrency}
             />
             {fromCurrency} / {toCurrency}
-            <button onClick={this.handleClick}>
+            <button 
+                onClick={this.HandleValidate}
+                disabled={!this.state.fromCurrency || !this.state.toCurrency}
+            >
                 Calculate
             </button>
         </div>)
     }
 
-    handleFromCurrencyChange = (currencyValue) => {
-        console.log(currencyValue);
-        this.setState({'fromCurrency': currencyValue});
+    handleFromCurrencyChange = (e) => {
+        console.log(e);
+        // this.setState({'fromCurrency': currencyValue}, this.HandleValidate());
     }
     
     handleToCurrencyChange = (currencyValue) => {
-        console.log(currencyValue);
         this.setState({'toCurrency': currencyValue});
     }
 
-    handleClick = () => {
-        const urlApi = "http://data.fixer.io/api/latest?access_key=f68b13604ac8e570a00f7d8fe7f25e1b&format=1";
-        axios.get(urlApi).then((response) => {
-            console.log(response.data)
-        }).catch((err) => {
-            console.log(err);
-        });
+    HandleValidate = () => {
+        console.log("HandleValidate");
+        if (this.state.fromCurrency && this.state.toCurrency)
+            Api.getCurrency(this.state.fromCurrency, this.state.toCurrency);
+        else
+            console.log('empty');
     }
 
     
