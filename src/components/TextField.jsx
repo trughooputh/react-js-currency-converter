@@ -18,19 +18,21 @@ class TextField extends React.Component {
 
   render() {
       return (
-        <div>
-        <label>
-          {this.props.label}
-          <input
-            type="text"
+        <div className="form-group col-5">
+          <label htmlFor={this.props.name}>{this.props.label}</label>
+          <input 
+            type="text" 
+            className="form-control" 
             name={this.props.name}
+            id={this.props.name} 
+            aria-describedby={this.props.name}
             onChange={this.handleChange}
             onBlur={this.props.onBlur}
             value={this.state.inputField}
           />
           {this.props.error && <div>{this.props.error}</div>}
-        </label>
-      </div>            
+          <small id={this.props.name} className="form-text text-muted">{this.props.description}</small>
+        </div>         
       );
   }
 }

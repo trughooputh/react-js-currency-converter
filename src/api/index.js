@@ -4,7 +4,8 @@ import axios from 'axios';
 
 const api = {
     async getCurrency(from, to) {
-        const urlApi = "http://data.fixer.io/api/latest?access_key=f68b13604ac8e570a00f7d8fe7f25e1b&format=1";
+        const apiKey = "f68b13604ac8e570a00f7d8fe7f25e1b";
+        const urlApi = `http://data.fixer.io/api/latest?access_key=${apiKey}&format=1`;
             axios.get(urlApi)
                 .then((response) => {
                     const rates = response.data.rates;
