@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
+
+import logo from './logo.svg';
 
 import CurrencyCalculator from './components/CurrencyCalculator';
 import AppFooter from './components/AppFooter';
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">

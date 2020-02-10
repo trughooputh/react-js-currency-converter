@@ -20,16 +20,28 @@ class TextField extends React.Component {
       return (
         <div className="form-group col-5">
           <label htmlFor={this.props.name}>{this.props.label}</label>
-          <input 
-            type="text" 
-            className="form-control" 
-            name={this.props.name}
-            id={this.props.name} 
-            aria-describedby={this.props.name}
-            onChange={this.handleChange}
-            onBlur={this.props.onBlur}
-            value={this.state.inputField}
-          />
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <span className="input-group-prepend">{this.props.currency.code}</span>
+            </div>
+            <input 
+              type="number" 
+              className="form-control" 
+              value={this.props.inputField}
+              name={this.props.name}
+              id={this.props.name} 
+              aria-describedby={this.props.name}
+              onChange={this.handleChange}
+              onBlur={this.props.onBlur}
+              step="1"
+              pattern="^\d+(\.|\,)\d{2}$"
+              disabled={this.props.readOnly}
+            />
+            <div className="input-group-append">
+              <span className="input-group-addon" id="basic-addon2">{this.props.currency.sign}</span>
+            </div>
+          </div>
+
           {this.props.error && <div>{this.props.error}</div>}
           <small id={this.props.name} className="form-text text-muted">{this.props.description}</small>
         </div>         
